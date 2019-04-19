@@ -5,12 +5,24 @@ mnist = tf.keras.datasets.mnist #28x28 images of hand-written digit 0-9
 x_train = tf.keras.utils.normalize(x_train, axis=1)
 x_test = tf.keras.utils.normalize(x_test, axis=1)
 
-# CNN model ---sequential
+model = tf.keras.models.Sequential()
+model.add(tf.keras.layers.Flatten())
+model.add(tf.keras.layers.Dense(128, activation=tf.nn.relu))
+model.add(tf.keras.layers.Dense(128, activation=tf.nn.relu))
+model.add(tf.keras.layers.Dense(10, activation=tf.nn.softmax))
+model.compile(optimizer='adam',loss='sparse_categorical_crossentropy',metrics=['accuracy'])
+model.fit(x_train,y_train,epochs=3)
 
-new_model = tf.keras.models.load_model('1.0_mnist')
-prediction = new_model.predict(x_test)
-print(len(prediction))
-import numpy as np
-print(np.argmax(prediction[100]))
-plt.imshow(x_test[100])
-plt.show()
+val_loss, val_acc = model.evaluate(x_test,y_test)
+model.save('first_try')
+
+
+
+
+# # new_model = tf.keras.models.load_model('1.0_mnist')
+# # prediction = new_model.predict(x_test)
+# print(len(prediction))
+# import numpy as np
+# print(np.argmax(prediction[100]))
+# plt.imshow(x_test[100])
+# plt.show()
