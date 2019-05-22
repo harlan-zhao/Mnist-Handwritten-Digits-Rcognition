@@ -1,5 +1,3 @@
-###Mnist-handwritten-digits-recognition
-
 1.This is a CNN model for handwritten digits recognition(mnist).
 
 2.Saved model is file "first_try"
